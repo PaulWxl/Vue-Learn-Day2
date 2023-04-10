@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 事件修饰符
+
+    在事件处理函数中调用event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，
+    vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制。常用的 5 个事件修饰符如下： -->
+
+
+
+    <!-- .prevent	阻止默认行为（例如：阻止 a 连接的跳转、阻止表单的提交等）
+    .stop	阻止事件冒泡
+    .capture	以捕获模式触发当前的事件处理函数
+    .once	绑定的事件只触发1次
+    .self	只有在 event.target 是当前元素自身时触发事件处理函数 
+
+
+    
+
+    在事件后面加，如下：
+    @click.prevent="事件处理函数名"    
+    @click.stop="事件处理函数名" 。 需要注意的是，阻止事件冒泡，需要在子元素身上加。而不是父元素。      
+
+    -->
+
+    <div id="app">
+
+        <!-- 希望给这个 超链接 绑定一个点击事件，在终端里面打印出一个字符串 -->
+        <!-- 加.prevent 阻止浏览器的默认行为--- 阻止链接跳转 -->
+        <a href="http://www.baidu.com" @click.prevent="show">跳转到百度首页</a>
+
+
+        <hr>
+
+        <div style="height: 1150px; background-color: orange; padding-left: 100px; line-height: 150px; " @click="divHandler" >
+            <button @click="btnHandler">按钮</button>
+        </div>
+    </div>
+
+
+
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+
+            data: {
+            },
+
+            methods: {
+                show() {
+
+                    // 阻止浏览器默认行为---不想让他跳转链接地址
+                    // vue简写：事件修饰符
+
+
+                    // e.preventDefault()
+                    console.log(' 点击了 a 链接')
+                },
+
+
+                // 父子元素都绑定了点击事件，存若点击子元素，同时也会触发父元素的点击事件。即：会发生事件冒泡。
+                btnHandler(e) {
+
+
+                    // 阻止事件冒泡也可以使用原生DOM方法
+                    // vue简化了写法：事件修饰符
+                    // e.stopPropagation()
+                    console.log('btnHandler')
+                },
+
+                divHandler() {
+                    console.log('divHandler')
+                }
+            }
+        })
+    </script>
+
+
+
+</body>
+</html>

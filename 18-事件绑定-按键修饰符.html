@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input:focus {
+            outline: 0;
+        }
+
+        input {
+            overflow: hidden;/*溢出隐藏*/
+        }
+    </style>
+</head>
+<body>
+    <!-- 按键修饰符
+
+    在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，例如： -->
+
+    
+    <!-- 加入按键修饰符   还是在事件名后面直接加.enter/.esc     -->
+    <div id="app">
+
+        <!-- 当按下esc之后，文本框里的内容就会被清空。 -->
+
+        <!-- 当按下enter之后， 就会触发 commitAjax 方法 -->
+        <input type="text" @keyup.esc="clearInput" maxlength="50" @keyup.enter="commitAjax">
+    </div>
+
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+            data: {},
+
+            methods: {
+                clearInput(e) {
+                    console.log('触发了 clearInput 方法')
+                    e.target.value = ''//注意e.target方法的使用，先获取到事件源，然后再value = ''
+                },
+
+                commitAjax() {
+                    console.log('触发了 commitAjax 方法')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

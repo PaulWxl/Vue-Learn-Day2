@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用 Javascript 表达式
+
+    在 vue 提供的模板渲染语法中，除了支持绑定简单的数据值之外，还支持 Javascript 表达式的运算，例如： -->
+
+    <div id="app">
+        
+        <!-- 插值表达式可以计算式子 -->
+        <p> 1 + 2 = {{ 1 + 2}}</p>
+        <p>tips 反转的结果是： {{ tips.split('').reverse().join('')}}</p>
+
+        <hr>
+
+        <!-- 在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如： -->
+        <div :title="'box' + index">这是一个div</div>
+    </div>
+
+
+
+    
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+   
+
+    <script>
+        const vm = new Vue({
+          
+            el: '#app',
+
+
+            
+            data: {
+                tips: '请输入用户名',
+                psw: '请输入密码',
+                photo: 'https://v2.cn.vuejs.org/images/logo.svg',
+                index: 3
+            }
+        })
+    </script>
+
+</body>
+</html>

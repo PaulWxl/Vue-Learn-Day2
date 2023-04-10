@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input:focus {
+            outline: 0;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- #### 2. 属性绑定指令
+
+    >  注意：插值表达式只能用在元素的**内容节点**中，不能用在元素的**属性节点**中！ 
+
+
+    如果需要为元素的属性动态绑定属性值，则需要用到v-bind 属性绑定指令。用法示例如下：
+    
+    v-bind是直接绑定在属性名的前面，而且要打冒号。
+
+
+
+    vue 规定 v-bind: 指令可以简写为 : 
+
+
+
+    + 在 vue 中，可以使用 `v-bind:` 指令，为元素的属性动态绑定值；
+
+    + 简写是英文的 `:`-->
+
+    <div id="app">
+
+        <!-- 插值表达式不能直接用在属性节点 , 只能用在内容节点。-->
+        <input type="text" v-bind:placeholder="tips"><br>
+        <input type="password" v-bind:placeholder="psw">
+
+        <hr>
+
+        <img v-bind:src="photo" alt="">
+
+        <hr>
+
+
+        <input type="text" :placeholder="tips"><br>
+        <input type="password" :placeholder="psw">
+
+
+        <hr>
+
+        <!-- 插值表达式可以计算式子 -->
+        <p> 1 + 2 = {{ 1 + 2}}</p>
+        <p>tips 反转的结果是： {{ tips.split('').reverse().join('')}}</p>
+
+        <hr>
+
+        <!-- 在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如： -->
+        <div :title="'box' + index">这是一个div</div>
+    </div>
+
+
+
+    
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+   
+
+    <script>
+        const vm = new Vue({
+          
+            el: '#app',
+
+
+            
+            data: {
+                tips: '请输入用户名',
+                psw: '请输入密码',
+                photo: 'https://v2.cn.vuejs.org/images/logo.svg',
+                index: 3
+            }
+        })
+    </script>
+
+</body>
+</html>

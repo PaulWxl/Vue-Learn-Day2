@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1.5 条件渲染指令
+
+    条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：
+    v-if
+    v-show
+
+
+    即： 如果某个判断条件成立的话，就希望展示这个元素，如果某个判断条件不成立的话，就隐藏。
+
+
+
+    示例用法如下： 
+
+    -->
+
+
+
+
+
+
+    <!-- #### 5. 条件渲染指令
+
+    1. `v-show` 的原理是：动态为元素添加或移除 `display: none` 样式，来实现元素的显示和隐藏
+    + 如果要频繁的切换元素的显示状态，用 v-show 性能会更好
+    2. `v-if` 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏
+    + 如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好
+
+    >  在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！ -->
+
+
+
+
+
+    <!-- v-if 和 v-show 的区别
+
+    实现原理不同：
+    v-if 指令会动态地创建或移除 DOM 元素，从而控制元素在页面上的显示与隐藏；直接动态地把这个元素删除了。
+
+
+    v-show 指令会动态为元素添加或移除 style="display: none;" 样式，从而控制元素的显示与隐藏；。v-show通过给元素加display:none隐藏。
+
+    性能消耗不同：
+    v-if有更高的切换开销，而v-show 有更高的初始渲染开销。因此：
+
+
+    
+    如果需要非常频繁地切换，则使用v-show 较好
+    如果在运行时条件很少改变，则使用v-if 较好
+
+
+
+    在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！
+ -->
+
+
+
+
+    <div id="app">
+        <!-- 如果flag为false 就隐藏 
+        如果为true，则显示。口诀：false隐藏（反之不用背）-->
+        <p v-if="flag">这是被 v-if 控制的元素</p>
+
+        <hr>
+
+
+        <p v-show="flag">这是被 v-show 控制的元素</p>
+
+        <hr>
+
+        <select name="grade" id="" v-model.number="type">
+            <option value="0">请选择等级</option>
+            <option value="1">A</option>
+            <option value="2">B</option>
+            <option value="3">C</option>
+            <option value="4">D</option>
+        </select>
+
+        <br>
+        <span style="font-size: 13px; display: block; margin-top: 10px;">您的评级为： 
+            <div v-if=" type === 1 ">优秀</div>
+            <div v-else-if=" type === 2 ">良好</div>
+            <div v-else-if=" type === 3 ">一般</div>
+            <div v-else-if=" type === 4 ">差</div>
+        
+        
+        
+        
+        </span>
+
+        
+
+
+        <!-- <div v-if="type === 'A' " >优秀</div> 
+        <div v-else-if="type === 'B' ">良好</div>
+        <div v-else-if="type === 'C' " >一般</div>
+        <div v-else>差</div> -->
+
+
+    
+    </div>
+
+
+    <script src="./lib/vue-2.6.12.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                // 如果 flag 为 true，则显示被控制的元素；如果为 false 则隐藏被控制的元素 初始化为false
+                flag: true,
+
+                type: 0
+            }
+
+        })
+    </script>
+    
+
+
+
+</body>
+</html>

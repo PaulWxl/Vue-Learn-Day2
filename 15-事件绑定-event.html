@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 事件参数对象
+
+    在原生的 DOM 事件绑定中，可以在事件处理函数的形参处，接收事件参数对象 event。同理，在v-on 指令
+    （简写为@ ）所绑定的事件处理函数中，同样可以接收到事件参数对象event，示例代码如下：
+
+
+    $event
+
+    $event 是 vue 提供的特殊变量，用来表示原生的事件参数对象event。$event 可以解决事件参数对象event
+    被覆盖的问题。-->
+
+
+
+
+
+    <div id="app">
+        <p> count的值为： {{ count }}</p>
+
+
+
+        <!-- vue 提供了内置变量，名字叫做 $event，注意，event前面一定要加dollar符号。它就是原生 DOM 的事件对象 e -->
+        <button @click="add($event, 1)">+N</button>
+    </div>
+
+
+
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+
+            data: {
+                count: 0
+            },
+            methods: {
+
+
+                // 希望每次触发add方法的时候，能够让按钮换一个背景颜色  如果 count 是偶数，则 按钮背景变成红色，否则，取消背景颜色
+
+                // 想要修改button的背景颜色，必须使用事件传递参数event对象，通过event.target拿到事件源
+
+
+                // 注意，函数可以传递多个参数，用逗号连接多个参数
+                add(e, n) {
+                    this.count = this.count + n
+                    // 如果函数不传参，默认有一个参数对象，event
+                    // console.log(event)
+                    // console.log(e)
+
+
+                    // 对count值做一下判断
+                    if (this.count % 2 === 0) {
+                        // e.target先拿到button，再通过style属性，修改背景颜色
+                        e.target.style.backgroundColor = '#4e6efb'
+
+                    }else {
+                        e.target.style.backgroundColor = ''
+                    }
+                }    
+            }
+        })
+    </script>
+
+</body>
+</html>
+
+
+
+

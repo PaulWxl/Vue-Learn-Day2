@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <link rel="stylesheet" href="./lib/brandlist.css">
+    <script src="./lib/dayjs.min.js"></script>
+</head>
+<body>
+    <!-- 可以通过输入豪车名称添加豪车，然后可以删除，添加，显示状态，创建时间等， -->
+
+    <div id="app">
+        <!-- 卡片区域 -->
+        <div class="card">
+
+            <div class="class-header">
+                添加品牌
+            </div>
+
+            <!-- 添加品牌的表单区域 -->
+            <div class="card-body">
+
+                <!-- 使用Bootstrap -->
+                <!-- 阻止form表单的自动提交（浏览器的默认行为） -->
+                <form class="form-inline" @submit.prevent="add">
+                    <div class="form-group">
+                      <!-- <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label> -->
+                      <div class="input-group">
+                        <div class="input-group-addon" style="text-align: center; border: 1px solid #999; background-color: gainsboro; padding: 7px;">品牌名称</div>
+                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入品牌名称" v-model.trim="brand" >
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">添加</button>
+                  </form>
+
+            </div>
+        </div>
+
+
+        <!-- 表格区域 -->
+        <table class="table table-bordered table-striped table-hover ">
+            <!-- 注意要给table加上.table类名，可以去bootstrap查一下剩余的那些类名以及效果 -->
+            <thead>
+                <tr>
+                    <!-- 注意，给每个表头单元格加上scope="col" 增加了标签语义化 -->
+                    <th scope="col">#</th>
+                    <th scope="col">品牌名称</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">创建时间</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- 注意，这里是给父元素tr绑定的v-for="item in list" 所以子元素随便用item -->
+                <tr v-for="item in list" :key="item.id" >
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+
+                    <td>
+                        <div class="custom-control custom-switch">
+                            <!-- 给复选框的id绑定v-bind 数据驱动视图，若model中的id改了，则checkbox 中的 id 会跟着 改变。 -->
+                            <input type="checkbox" class="custom-control-input" name="custom-control-input" :id="'ckb' + item.id" v-model="item.status">
+                            <!-- 注意label的for也要v-bind，否则无法使用item -->
+                            <label :for="'ckb' + item.id" class="custom-control-label"  v-if="item.status == true">已启用</label>
+                            <label :for="'ckb' + item.id" class="custom-control-label" v-else>已禁用</label>
+                        </div>
+
+                    </td>
+
+                    <!-- 利用 全局 过滤器 格式化 时间  -->
+                    <td>{{ item.time | dateFormat }}</td>
+
+                    <!-- 删除 -->
+                    <td>
+                        <a href="javascript:;" @click="remove(item.id)">删除</a>
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./lib/vue-2.6.12.js">
+
+    </script>
+
+
+    <script>
+        // 声明格式化时间的全局过滤器
+        Vue.filter('dateFormat', (time) => {
+            // 1. 对 time 进行格式化处理，得到 YYYY-MM-DD HH:mm:ss
+            // 2. 把 格式化的结果，return 出去
+
+            // 直接调用 dayjs() 得到的是当前时间
+            // dayjs(给定的日期时间) 得到指定的日期
+            //注意， 必须是 YYYY-MM-DD HH-mm-ss 时 要 大写， 分 和 秒 要 小写， 否则 出不来效果。 
+            const dtStr = dayjs(time).format('YYYY/M/D HH:mm ')
+            return dtStr  
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    { id: 1, name: '宝马', status: true, time: new Date() },
+                    { id: 2, name: '奔驰', status: true, time: new Date() },
+                    { id: 3, name: '奥迪', status: true, time: new Date() },
+                ],
+
+                brand: '',
+
+                //这里引入了一个nextID，用来表述添加的项的id，初始化为4（当然这也是问题所在）
+                nextID: 4
+
+
+
+            },
+
+            methods: {
+                add() {
+                    // 先判断是否为空字符串，若为空，则return出去
+                    if (this.brand == '') return alert('必须输入有效内容！')
+
+                    // 创建一个对象添加
+                    const obj = {
+                        id: this.nextID,
+                        name:  this.brand,
+                        status: true,
+                        time: dayjs()
+                    }
+
+                    //创建完对象后，把对象放入数组的末尾，用push方法
+                    this.list.push(obj)
+
+                    // 添加一项之后，nextID自增1
+                    //注意使用nextID时，前面要加this
+                    this.nextID++
+                },
+
+                remove(id) {
+                    //用数组的filter方法实现删除列表
+                    this.list = this.list.filter( item => item.id != id)
+
+                    // 删除一项后，自减1
+                    this.nextID--
+                }
+            }
+        })
+    </script>
+</body>
+</html>

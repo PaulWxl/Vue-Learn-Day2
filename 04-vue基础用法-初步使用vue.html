@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- vue 的基本使用
+
+    1. 基本使用步骤
+
+    ① 导入 vue.js 的 script 脚本文件
+    ② 在页面中声明一个将要被vue 所控制的 DOM 区域
+    ③ 创建 vm 实例对象（vue 实例对象）
+
+
+    -->
+
+
+
+    <!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
+    <!-- 标签里面两个引号： 叫做vue的双花括号语法。双花括号里面的是data对象中的属性名。前后可以加空格，这样看起来更加的清晰。  -->
+    <div id="app">{{ username }}</div>
+
+
+
+    <!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+    <!-- 2. 创建 Vue 的实例对象  注意也是在script标签中写 -->
+
+    <script>
+        const vm = new Vue({
+            // el 属性是固定的写法，表示当前 vm 实例,要控制页面上的哪个区域，接收的值是一个选择器
+            //即：v view视图
+            el: '#app',
+
+
+            // data 对象就是要渲染到页面上的数据,即：Model 数据源
+            //即：m model数据源
+            data: {
+                username: 'zhangsan'//这里的属性名要和标签内部的{{属性名}}一致，才能实现数据驱动视图。
+            }
+        })
+    </script>
+
+</body>
+</html>

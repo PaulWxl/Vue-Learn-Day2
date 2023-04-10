@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1.3 事件绑定指令
+
+    vue 提供了v-on 事件绑定指令，用来辅助程序员为 DOM 元素绑定事件监听。语法格式如下:
+     
+
+    注意：原生 DOM 对象有onclick、oninput、onkeyup 等原生事件，替换为vue 的事件绑定形式后，
+    分别为：v-on:click、v-on:input、v-on:keyup
+
+
+
+    通过v-on 绑定的事件处理函数，需要在methods 节点中进行声明：
+
+-->
+
+    <div id="app">
+        <h3>count 的值为: {{ count }}</h3>
+
+        <!-- 事件处理函数如果没有参数那么在里面就不用写括号 -->
+        <button v-on:click="add">+1</button>
+
+
+        <!-- vue 规定， v-on: 指令可以被简写为 @ -->
+        <button @click="sub">-1</button>
+        <button @click="double">*2</button>
+        <button v-on:click="ddouble">*4</button>
+        <button v-on:click="zero">归零</button>
+    </div>
+    <script src="./lib/vue-2.6.12.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 1
+            },
+
+
+            //注意， methods 的作用，就是定义事件的处理函数
+            methods: {
+
+                // 老师推荐函数都进行简写,省略:function 
+                add() {
+
+                     // 在 methods 处理函数中，this 就是 new 出来的 vm 实例对象
+                     console.log(this === vm)
+                     console.log('触发了 add 函数')
+                    this.count++
+                },
+
+                sub() {
+                    console.log('触发了 sub 函数')
+                    this.count--
+                },
+
+                double() {
+                    console.log('触发了 double 函数')
+
+                    this.count = this.count * 2
+                },
+
+                ddouble() {
+                    console.log('触发了 ddouble 函数')
+
+                    this.count = this.count * 4
+                },
+
+                zero() {
+                    this.count = 0
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

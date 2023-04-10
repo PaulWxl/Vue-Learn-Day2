@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1.4 双向绑定指令
+
+    vue 提供了v-model 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。 
+
+
+    v-model 指令的修饰符
+
+    为了方便对用户输入的内容进行处理，vue 为 v-model 指令提供了 3 个修饰符，分别是：
+
+
+    修饰符	作用	示例
+    .number	自动将用户的输入值转为数值类型	<input v-model.number="age" />
+    .trim	自动过滤用户输入的首尾空白字符	<input v-model.trim="msg" />
+    .lazy	在“change”时而非“input”时更新	<input v-model.lazy="msg" />
+
+-->
+
+
+
+
+
+
+    <!-- 1. + 
+
+    #### 4. v-model 指令
+
+
+    v-model 只能和表单元素一起使用
+
+
+    1. input 输入框
+    + type="text"
+    + type="radio"
+    + type="checkbox"
+    + type="xxxx"
+    2. textarea
+    3. select -->
+
+
+
+
+
+    <div id="app">
+        <p>用户的名字是： “{{ username }}”</p>
+        <!-- v-model: 让这个文本框的内容和某一个数据进行双向绑定. 即： data对象中的数据变化，view视图中的DOM元素的文本内容会跟着变化。 -->
+
+
+        <!--v-model直接作为标签的属性，加到标签中。 v-model="data对象的属性名" -->
+        <input type="text" v-model="username"><!--文本框中会直接由data对象中username属性的值-->
+
+        <hr>
+
+
+
+        <!-- v-bind只能实现数据驱动视图，但是v-model可以实现双向数据绑定。 -->
+        <input type="text" :value="username">
+
+        <hr>
+
+
+
+        <!-- 可以把数据渲染到div内部，同时div也有呈现数据的能力，但是div无法允许用户修改里面的值。 即： 能和用户产生交互的，只有那些表单元素。-->
+        <div v-model="username"></div>
+
+        <hr>
+
+
+        <!-- 注意select中，传递的是option中value的值 -->
+        <select name="choosecity" id="" v-model="city" >
+            <option value="" >请选择城市</option>
+            <option value="1" >北京</option>
+            <option value="2" >上海</option>
+            <option value="3">广州</option>
+            <option value="4">深圳</option>
+        </select>
+
+        <!-- city 是一个 数字 传递 的 是 option 中 的 value  -->
+        <p>city: {{ city }}</p>
+
+
+        <hr>
+        <!-- 插值表达式中如果使用数组方法，那么不用重复加插值表达式 -->
+        <p>您选择的城市是： {{ citys[city-1] }}</p>
+    </div>
+
+
+    <script src="./lib/vue-2.6.12.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+            data: {
+                username: 'zhangsan',
+                
+                citys: ['北京', '上海', '广州', '深圳'],
+
+                // 希望用户在select中选完之后，能在数据源中更新city的值
+                city: ''
+            },
+
+            methods: {
+                showName() {
+
+                    // 控制台输出，用的是模版字符串
+                    console.log(`用户名是：“${this.username}”`)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 给这一行的tr加了一个v-for="item in list" td中就可以直接使用item了  注意加v-for 后一定要使用:key="item.id"  -->
+    <!-- <tr v-for="item in list" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+
+
+
+
+        <td>
+
+          这个状态这里，这些类名应该是bootstrap里面的 
+
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" :id="'cb' + item.id" v-model="item.status">id=cb1/cb2/cb3/cb4 给input加了一个双向数据绑定item.status,可以更改model中的status。
+
+            <label class="custom-control-label" :for="'cb' + item.id" v-if="item.status === true">已启用</label>
+            <label class="custom-control-label" :for="'cb' + item.id" v-else>已禁用</label>
+          </div>
+
+
+
+        </td>
+
+
+
+
+        <td>{{ item.time }}</td>
+
+
+
+        <td>
+          <a href="javascript:;" @click="remove(item.id)">删除</a>
+        </td>
+
+
+
+      </tr> -->
+</body>
+</html>

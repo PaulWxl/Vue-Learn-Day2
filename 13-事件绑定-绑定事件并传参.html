@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- 绑定事件并传参
+
+    在使用v-on 指令绑定事件时，可以使用 ( ) 进行传参，示例代码如下 -->
+
+    <div id="app">
+        <h3>count 的值为: {{ count }}</h3>
+
+        <!-- 绑定事件并传参 -->
+        <button v-on:click="add(3)">+3</button>
+
+
+
+        <button @click="sub">-1</button>
+        <button @click="double">*2</button>
+        <button v-on:click="ddouble">*4</button>
+        <button v-on:click="zero">归零</button>
+    </div>
+    <script src="./lib/vue-2.6.12.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 1
+            },
+
+
+            methods: {
+
+                // 绑定事件并传参
+                add(n) {
+
+                     console.log(this === vm)
+                     console.log('触发了 add 函数')
+                    this.count = this.count + n 
+                },
+
+                sub() {
+                    console.log('触发了 sub 函数')
+                    this.count--
+                },
+
+                double() {
+                    console.log('触发了 double 函数')
+
+                    this.count = this.count * 2
+                },
+
+                ddouble() {
+                    console.log('触发了 ddouble 函数')
+
+                    this.count = this.count * 4
+                },
+
+                zero() {
+                    this.count = 0
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

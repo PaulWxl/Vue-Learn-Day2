@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- el控制DOM元素区域，建议在最外面设置一个大的div，里面的子元素也会被vm控制。在这个大的div内部去写vue的语法 ， 一般给这个最外面的大的div都会起一个叫做app的id名。这是推荐的类名，照着推荐的先做。-->
+
+
+    <div id="app">
+        <p v-text="username"></p>
+        <p v-html="username"></p>
+        <p >{{ username }}</p>
+        <!-- v-text会覆盖原本的文本内容 -->
+        <p v-text="username">姓名： </p>
+
+        <!-- 相对于v-text 指令来说，插值表达式在开发中更常用一些！因为它不会覆盖元素中默认的文本内容。 -->
+        <p >姓名： {{ username}}</p>
+
+
+        <hr>
+
+        <p v-html="age"></p>
+        <p> {{ age }}</p>
+        <p v-text="age"></p>
+        <p >年龄： {{ age }}</p>
+
+        <hr>
+
+        <p v-html="gender"></p>
+        <p v-text="gender"></p>
+        <p >{{ gender }}</p>
+        <p>性别： {{ gender }}</p>
+
+        <hr>
+
+        <div v-html="info"></div>
+    </div>
+
+    
+    
+    
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: '陈涛',
+                age: 22,
+                gender: '男',
+                 // 注意，info实在data对象里面加的
+                info: '<h4 style="color: #4e6efb; font-size: 15px; font-family: 楷体;">带标签的内容</h4>'
+            },
+        })
+    </script>
+</body>
+</html>

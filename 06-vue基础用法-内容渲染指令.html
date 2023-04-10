@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- vue 的指令与过滤器
+    
+    
+    
+    1. 指令的概念
+
+    指令（Directives）是 vue 为开发者提供的模板语法，用于辅助开发者渲染页面的基本结构。
+
+    vue 中的指令按照不同的用途可以分为如下 6 大类：
+    ①	内容渲染指令
+    ②	属性绑定指令
+    ③	事件绑定指令
+    ④	双向绑定指令
+    ⑤	条件渲染指令
+    ⑥	列表渲染指令
+
+    注意：指令是vue 开发中最基础、最常用、最简单的知识点。
+    以上的6大指令都是重点。-->
+
+
+
+    <!-- 1. 内容渲染指令
+
+    内容渲染指令用来辅助开发者渲染 DOM 元素的文本内容。常用的内容渲染指令有如下 3 个：
+    v-text
+    {{ }}
+    v-html
+
+
+
+
+    #### 1. 内容渲染指令
+
+    1. `v-text` 指令的缺点：会覆盖元素内部原有的内容！
+    2. `{{ }}` 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！
+    3. `v-html` 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！
+
+
+    v-text是直接在标签后面跟着加的，相当于作为标签的一个属性。v-text="data对象中的属性名" 
+
+
+
+
+
+    注意：v-text 指令会覆盖元素内默认的值。
+    {{ }} 语法
+
+    vue 提供的 {{ }} 语法，专门用来解决v-text 会覆盖默认文本内容的问题。这种 {{ }} 语法的专业名称是插值表达式（英文名为：Mustache）。
+    注意：相对于v-text 指令来说，插值表达式在开发中更常用一些！因为它不会覆盖元素中默认的文本内容。
+    
+
+
+
+
+
+    v-html
+
+    v-text 指令和插值表达式只能渲染纯文本内容。如果要把包含 HTML 标签的字符串渲染为页面的HTML 元素，则需要用到v-html 这个指令：
+
+    优点：v-html可以识别html标签
+    -->
+
+
+    <div id="app">
+        <p v-text="username"></p>
+        <p v-html="username"></p>
+        <p >{{ username }}</p>
+        <!-- v-text会覆盖原本的文本内容 -->
+        <p v-text="username">姓名： </p>
+
+        <!-- 相对于v-text 指令来说，插值表达式在开发中更常用一些！因为它不会覆盖元素中默认的文本内容。 -->
+        <p >姓名： {{ username}}</p>
+
+
+        <hr>
+
+        <p v-html="age"></p>
+        <p> {{ age }}</p>
+        <p v-text="age"></p>
+        <p >年龄： {{ age }}</p>
+
+        <hr>
+
+        <p v-html="gender"></p>
+        <p v-text="gender"></p>
+        <p >{{ gender }}</p>
+        <p>性别： {{ gender }}</p>
+
+        <hr>
+
+        <div v-html="info"></div>
+    </div>
+
+    
+    
+    
+    <script src="./lib/vue-2.6.12.js"></script>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: '陈涛',
+                age: 22,
+                gender: '男',
+                 // 注意，info实在data对象里面加的
+                info: '<h4 style="color: #4e6efb; font-size: 15px; font-family: 楷体;">带标签的内容</h4>'
+            },
+        })
+    </script>
+</body>
+</html>

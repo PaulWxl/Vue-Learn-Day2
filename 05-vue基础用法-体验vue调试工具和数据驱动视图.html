@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- vue 的调试工具 
+    
+    
+    1. 安装 vue-devtools 调试工具
+
+    vue 官方提供的vue-devtools 调试工具，能够方便开发者对vue 项目进行调试与开发。
+
+    Chrome 浏览器在线安装vue-devtools ：
+    https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
+
+    FireFox 浏览器在线安装vue-devtools ：
+    https://addons.mozilla.org/zh-CN/firefox/addon/vue-js-devtools/
+
+
+    2. 配置 Chrome 浏览器中的 vue-devtools
+
+    选择更多工具-> 扩展程序-> Vue.js devtools 详细信息
+    
+
+    Root指向的就是在el中绑定的区域， 点击Root，可以看到data，即：可以通过Root看到Model数据源。可以点击铅笔，更改数据源，然后vm就会自动更新绑定的区域，即：监听数据源的改变，然后自动更新视图。即: 数据驱动视图。 -->
+
+    <div id="app">{{ username }}</div>
+    <script src="./lib/vue-2.6.12.js"></script>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                username: '赖毅博'
+            }
+        })
+    </script>
+</body>
+</html>
